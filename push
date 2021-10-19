@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# run "chmod u+x push" to make this script executable
+
+# COMMAND: ./push "Commit message."
+# $0 is the script name, $1 is the message.
+message=$1
+
+./commit "$1"
+git push

@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# run "chmod u+x commit" to make this script executable
+
+# COMMAND: ./commit "Commit message."
+# $0 is the script name, $1 is the message.
+message=$1
+
+terraform fmt -recursive
+git add -A
+git commit -m "$1"

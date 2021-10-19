@@ -14,11 +14,11 @@ resource "aws_security_group" "rds_sg" {
   vpc_id = var.vpc_id
 
   tags = {
-    Application = "${var.app_name}"
-    Billing     = "${var.environment}"
-    Environment = "${var.environment}"
+    Application = var.app_name
+    Billing     = var.environment
+    Environment = var.environment
     Name        = "${var.environment}-${var.app_name}-rds-sg"
-    Terraform   = "true"
+    Terraform   = true
   }
 }
 
@@ -66,11 +66,11 @@ resource "aws_db_subnet_group" "default" {
   subnet_ids = concat(var.private_subnets, var.public_subnets)
 
   tags = {
-    Application = "${var.app_name}"
+    Application = var.app_name
     Billing     = "${var.environment}-${var.app_name}"
-    Environment = "${var.environment}"
+    Environment = var.environment
     Name        = "${var.environment}-${var.app_name}-aurora-cluster-subnet-group"
-    Terraform   = "true"
+    Terraform   = true
   }
 }
 
@@ -85,11 +85,11 @@ resource "aws_rds_cluster_instance" "cluster_instances" {
   publicly_accessible  = true
 
   tags = {
-    Application = "${var.app_name}"
+    Application = var.app_name
     Billing     = "${var.environment}-${var.app_name}"
-    Environment = "${var.environment}"
+    Environment = var.environment
     Name        = "${var.environment}-${var.app_name}-db${count.index}"
-    Terraform   = "true"
+    Terraform   = true
   }
 }
 
@@ -125,11 +125,11 @@ resource "aws_rds_cluster" "cluster" {
   vpc_security_group_ids = concat(list(aws_security_group.rds_sg.id), var.additional_security_groups)
 
   tags = {
-    Application = "${var.app_name}"
+    Application = var.app_name
     Billing     = "${var.environment}-${var.app_name}"
-    Environment = "${var.environment}"
+    Environment = var.environment
     Name        = "${var.environment}-${var.app_name}-aurora-cluster"
-    Terraform   = "true"
+    Terraform   = true
   }
 }
 
